@@ -44,7 +44,7 @@ document.querySelectorAll(".nav-list a").forEach(link => {
 
 // Include EmailJS SDK
 (function () {
-    emailjs.init("YOUR_PUBLIC_KEY"); // //Replace with your EmailJS public key
+    emailjs.init("YOUR_PUBLIC_KEY"); // ////Replace with your EmailJS public key
 })();
 
 document.querySelector(".newsletter").addEventListener("submit", function (e) {
