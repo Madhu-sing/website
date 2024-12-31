@@ -969,7 +969,18 @@ section.testimonials {
 	position: relative;
 	padding: 20px 25px;
 	background-color: var(--primary-light-clr);
-	height: 400px;
+	height: auto;
+	margin: 10px;
+	width: 300px;
+}
+
+#testimonials-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.testimonials-item {
+	width: fit-content;
 }
 
 .testimonials-item .profile {

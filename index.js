@@ -21,10 +21,79 @@ $(document).ready(function () {
     });
 });
 
+document.querySelector(".course-list").addEventListener("click", () => {
+    console.log("fetch course")
+    fetch('http://localhost:5000/api/courses')
+        .then(response => response.json())
+        .then(courses => {
+
+            const coursesList = document.getElementById('course-list');
+            courses.forEach(course => {
+                console.log("course adta", JSON.stringify(course));
+                const courseCard = document.createElement('div');
+                courseCard.classList.add('course-card');
+                courseCard.innerHTML = `
+                    <img src="${course.img}" alt="${course.title}">
+                    <div class="category">
+                    <div class="subject">
+							<h3>${course.title}</h3>
+						</div>
+                    <p>${course.description}</p>
+                    </div>
+                `;
+                coursesList.appendChild(courseCard); // Add the card to the list
+                // Populate the courses section dynamically
+            })
+                .catch(error => console.error('Error fetching courses:', error));
+        })
+});
+
+document.querySelector(".testimonials").addEventListener("click", () => {
+    console.log("fetch testimonials")
+    fetch('http://localhost:5000/api/testimonials') // Replace with your actual API endpoint
+        .then(response => response.json())
+        .then(testimonials => {
+            console.log("fetch testimonials---", JSON.stringify(testimonials))
+            const testimonialsList = document.getElementById('testimonials-list');
+            testimonials.forEach(testimonial => {
+                const testimonialCard = document.createElement('div');
+                testimonialCard.classList.add('testimonials-item');
+                testimonialCard.innerHTML = `
+                <div class="profile">
+                    <div class="profile-image">
+                        <img src="${testimonial.img}" alt="${testimonial.name}">
+                    </div>
+                    <div class="profile-desc">
+                        <span>${testimonial.name}</span>
+                    </div>
+                </div>
+                <p>${testimonial.feedback}</p>
+                <p>${testimonial.description}</p>
+					<div class="quote">
+						<i class="fa fa-quote-left"></i>
+					</div>
+                <div class="ratings">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                </div>
+            `;
+                testimonialsList.appendChild(testimonialCard);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching testimonials:', error);
+            document.getElementById('testimonials-list').innerHTML = `<p>Error loading testimonials.</p>`;
+        });
+});
 // Search Bar Alert (Optional for Demo)
 document.querySelector(".search-bar i").addEventListener("click", () => {
     const query = document.querySelector(".search-bar input").value;
     alert(`Searching for: ${query}`);
+
+
 });
 
 // Smooth Scrolling for Navigation Links
@@ -41,6 +110,8 @@ document.querySelectorAll(".nav-list a").forEach(link => {
         }
     });
 });
+
+
 
 // Include EmailJS SDK
 (function () {
